@@ -1,12 +1,13 @@
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
+import os
 import json
 import ast
 import vrp_io
 import vrp_pickup
 
 app = Flask(__name__)
-#api = Api(app)
+port = int(os.environ.get('PORT', 5000))
 
 
 @app.route('/routing_table', methods=['GET'])
@@ -19,7 +20,7 @@ def get_route():
 
 
 if __name__ == '__main__':
-     app.run(debug=True, port=33507)  # run our Flask appS
+     app.run(host='0.0.0.0', port=port, debug=True)  # run our Flask appS
 
 # class RoutingTable(Resource):
 #     def GET(self):
