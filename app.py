@@ -7,7 +7,7 @@ import vrp_io
 import vrp_pickup
 
 app = Flask(__name__)
-port = int(os.environ.get('PORT', 5000))
+port = int(os.environ.get('PORT',  46433))
 
 
 @app.route('/routing_table', methods=['GET'])
