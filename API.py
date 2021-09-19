@@ -19,7 +19,7 @@ def get_route():
 
 
 if __name__ == '__main__':
-     app.run()  # run our Flask appS
+     app.run(debug=True, port=33507)  # run our Flask appS
 
 # class RoutingTable(Resource):
 #     def GET(self):
