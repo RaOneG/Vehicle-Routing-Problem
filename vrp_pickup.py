@@ -7,7 +7,6 @@ from ortools.constraint_solver import routing_enums_pb2
 from ortools.constraint_solver import pywrapcp
 import distance_matrix as dis_mx
 import vrp_io
-import json
 
 def create_data_model():
     """Stores the data for the problem."""
