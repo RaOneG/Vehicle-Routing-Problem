@@ -76,5 +76,3 @@ def build_distance_matrix(response):
     row_list = [row['elements'][j]['distance']['value'] for j in range(len(row['elements']))]
     distance_matrix.append(row_list)
   return distance_matrix
-
-print(create_distance_matrix())
