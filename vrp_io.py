@@ -93,7 +93,6 @@ def get_pickup_dropoff(data):
 
 "Final Output"
 # mapping back to order_id and pickup and delivery location
-routes = [[0, 5, 3, 1, 6, 4, 2]] #THIS IS NOT AN ACTUAL LIST
 def get_deliverer_route(routes, deliverer_location):
   orders_addresses = get_orders_list(orders_dataset_original)
   routes.pop(0) # remove the deliverer_location

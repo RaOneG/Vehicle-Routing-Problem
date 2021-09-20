@@ -1,11 +1,6 @@
-"""Simple Vehicles Routing Problem (VRP).
-
-   This is a sample using the routing library python wrapper to solve a VRP
-   problem.
-   A description of the problem can be found here:
-   http://en.wikipedia.org/wiki/Vehicle_routing_problem.
-
-   Distances are in meters.
+"""
+Simple Vehicles Routing Problem (VRP).
+Distances are in meters.
 """
 
 from ortools.constraint_solver import routing_enums_pb2
@@ -17,7 +12,8 @@ import json
 def create_data_model():
     """Stores the data for the problem."""
     data = {}
-    data['distance_matrix'] = dis_mx.create_distance_matrix()
+    data['distance_matrix'] = [[0, 14662, 55513, 14662, 16875, 14662, 9802, 14662, 9802, 14662, 9802], [13329, 0, 49853, 0, 2943, 0, 714, 0, 715, 0, 714], [56225, 50716, 0, 50716, 44373, 50716, 49898, 50716, 49898, 50716, 49898], [13329, 0, 49853, 0, 2943, 0, 714, 0, 715, 0, 714], [16446, 3847, 43935, 3847, 0, 3847, 3831, 3847, 3831, 3847, 3831], [13329, 0, 49853, 0, 2943, 0, 714, 0, 715, 0, 714], [10444, 1332, 50455, 1332, 3545, 1332, 0, 1332, 0, 1332, 0], [13329, 0, 49853, 0, 
+2943, 0, 714, 0, 715, 0, 714], [10444, 1332, 50455, 1332, 3546, 1332, 0, 1332, 0, 1332, 0], [13329, 0, 49853, 0, 2943, 0, 714, 0, 715, 0, 714], [10444, 1332, 50455, 1332, 3545, 1332, 0, 1332, 0, 1332, 0]]
     data['num_vehicles'] = 1
     data['starts'] = [0]
     data['ends'] = [0]
@@ -42,27 +38,6 @@ def get_routes():
     return routes
 
 
-#def print_solution(data, manager, routing, solution):
-    """Prints solution on console. NOT USED"""
-    print(f'Objective: {solution.ObjectiveValue()}')
-    total_distance = 0
-    for vehicle_id in range(data['num_vehicles']):
-        index = routing.Start(vehicle_id)
-        plan_output = 'Route for vehicle {}:\n'.format(vehicle_id)
-        route_distance = 0
-        while not routing.IsEnd(index):
-            plan_output += ' {} -> '.format(manager.IndexToNode(index))
-            previous_index = index
-            index = solution.Value(routing.NextVar(index))
-            route_distance += routing.GetArcCostForVehicle(
-                previous_index, index, vehicle_id)
-        plan_output += '{}\n'.format(manager.IndexToNode(index))
-        plan_output += 'Distance of the route: {}m\n'.format(route_distance)
-        #print(plan_output)
-        total_distance += route_distance
-    print('Total Distance of all routes: {}m'.format(total_distance))
-
-
 def main_solution():
     """Entry point of the program."""
     # Instantiate the data problem.
@@ -75,7 +50,6 @@ def main_solution():
 
     # Create Routing Model.
     routing = pywrapcp.RoutingModel(manager)
-
 
     # Define cost of each arc.
     def distance_callback(from_index, to_index):
@@ -120,7 +94,3 @@ def main_solution():
     solution = routing.SolveWithParameters(search_parameters)
 
     return solution, routing, manager
-
-
-routes = get_routes()
-route = routes[0]
