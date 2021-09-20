@@ -120,3 +120,7 @@ def main_solution():
     solution = routing.SolveWithParameters(search_parameters)
 
     return solution, routing, manager
+
+
+routes = get_routes()
+route = routes[0]
