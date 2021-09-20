@@ -9,6 +9,7 @@ Original file is located at
 """
 
 import pandas as pd
+import json
 from collections import OrderedDict
 
 "read the dataset"
@@ -101,4 +102,5 @@ def get_deliverer_route(routes, deliverer_location):
   for location in routes:
     location = location - 1   # because the deliverer_location = 0 which is not in the orders_adresses so orders_adresses[0] is equivalent to routes[1]
     route_table[orders_addresses[location][0]] = orders_addresses[location][1].replace('%2C', ', ')
+    route_table = json.dumps(route_table, indent=4)
   return route_table
