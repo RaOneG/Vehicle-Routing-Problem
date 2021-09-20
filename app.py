@@ -1,8 +1,7 @@
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
 import vrp_io
-import os
-import ast
+import vrp_pickup
 
 
 app = Flask(__name__)
@@ -11,7 +10,8 @@ api = Api(app)
 
 class Routing(Resource):
     def get(self):
-        return vrp_io.get_deliverer_route([0, 1, 3, 9, 7, 5, 6, 8, 10, 4, 2], '53.425334%2C-6.231581')
+        route = vrp_pickup.get_routes()
+        return vrp_io.get_deliverer_route(route[0], '53.425334%2C-6.231581')
 
 api.add_resource(Routing, '/routing')
 
