@@ -12,7 +12,13 @@ api = Api(app)
 
 class Routing(Resource):
     def get(self):
-        return 'Hello'
+        return {"deliverer_location": "53.425334, 2C-6.231581",
+                "921945_pickup": "53.34581, -6.25543",
+                "18_pickup": "51.89851, -8.4756",
+                "17_pickup": "51.89851, -8.4756",
+                "921945_dropoff": "53.32604, -6.31861",
+                "18_dropoff": "51.562092, -0.076668",
+                "17_dropoff": "51.507351, -0.127758"}
 
 
 api.add_resource(Routing, '/routing')
