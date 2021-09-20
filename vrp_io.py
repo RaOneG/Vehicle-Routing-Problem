@@ -84,7 +84,7 @@ def get_pickup_dropoff(data):
   no_location = len(orders_addresses)
   # check it has equal pickups and dropoffs
   if no_location % 2 == 0:
-    for n in range(1, no_location - 1, 2):
+    for n in range(1, no_location, 2):
       data['pickups_deliveries'].append([n, n+1])
   else:
     print("Warning there's a missing pickup or drop off location!")
@@ -98,7 +98,7 @@ def get_deliverer_route(routes, deliverer_location):
   orders_addresses = get_orders_list(orders_dataset_original)
   routes.pop(0) # remove the deliverer_location
   route_table = OrderedDict()
-  route_table['deliverer_location'] = deliverer_location
+  route_table['deliverer_location'] = deliverer_location.replace('%2C', ', ')
   for location in routes:
     location = location - 1   # because the deliverer_location = 0 which is not in the orders_adresses so orders_adresses[0] is equivalent to routes[1]
     route_table[orders_addresses[location][0]] = orders_addresses[location][1].replace('%2C', ', ')
