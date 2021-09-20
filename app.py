@@ -7,20 +7,33 @@ import vrp_io
 import vrp_pickup
 
 app = Flask(__name__)
+api = Api(app)
 #port = int(os.environ.get('PORT',  46433))
 
+class Routing(Resource):
+    def get(self):
+        routes = vrp_pickup.get_routes()
+        route_table = vrp_io.get_deliverer_route(routes[0], '53.425334%2C-6.231581')
+        # store in a json filewith open('route_table.json', 'w') as file:
+        route_table = json.dumps(route_table)
+        return route_table
 
-@app.route('/routing_table', methods=['GET'])
-def get_route():
-    routes = vrp_pickup.get_routes()
-    route_table = vrp_io.get_deliverer_route(routes[0], '53.425334%2C-6.231581')
-    # store in a json filewith open('route_table.json', 'w') as file:
-    route_table = json.dumps(route_table, indent=4)
-    return route_table
 
+api.add_resource(Routing, '/routing')
 
 if __name__ == '__main__':
      app.run()  # run our Flask app
+
+#@app.route('/routing_table', methods=['GET'])
+# def get_route():
+#     routes = vrp_pickup.get_routes()
+#     route_table = vrp_io.get_deliverer_route(routes[0], '53.425334%2C-6.231581')
+#     # store in a json filewith open('route_table.json', 'w') as file:
+#     route_table = json.dumps(route_table, indent=4)
+#     return route_table
+
+
+
 
 # class RoutingTable(Resource):
 #     def GET(self):
