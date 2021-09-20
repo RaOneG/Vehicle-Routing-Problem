@@ -7,7 +7,7 @@ import vrp_io
 import vrp_pickup
 
 app = Flask(__name__)
-port = int(os.environ.get('PORT',  46433))
+#port = int(os.environ.get('PORT',  46433))
 
 
 @app.route('/routing_table', methods=['GET'])
@@ -20,7 +20,7 @@ def get_route():
 
 
 if __name__ == '__main__':
-     app.run(host='0.0.0.0', port=port, debug=True)  # run our Flask appS
+     app.run()  # run our Flask app
 
 # class RoutingTable(Resource):
 #     def GET(self):
