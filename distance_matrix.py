@@ -13,13 +13,14 @@ import requests
 import json
 import urllib.request
 import vrp_io
-
+from starlette.config import Config
 
 def create_data():
   """Creates the data."""
+  config = Config(".env")
   #load_dotenv()
   data = {}
-  data['API_key'] = 'AIzaSyDg8oDMkIGwPg-JHc86lxvX4SNce6TzjWs'
+  data['API_key'] = config("API_KEY", cast=str)
   data['addresses'] = vrp_io.get_addresses('53.425334%2C-6.231581', data)
   return data
 
