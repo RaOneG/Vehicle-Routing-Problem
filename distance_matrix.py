@@ -64,7 +64,7 @@ def send_request(origin_addresses, dest_addresses, API_key):
   request = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial'
   origin_address_str = build_address_str(origin_addresses)
   dest_address_str = build_address_str(dest_addresses)
-  request = str(request) + '&origins=' + str(origin_address_str) + '&destinations=' + str(dest_address_str) + '&key=' + str(API_key)
+  request = str(request) + '&origins=' + str(origin_address_str) + '&destinations=' + str(dest_address_str) + '&key=' +str(API_key)
   jsonResult = urllib.request.urlopen(request).read()
   response = json.loads(jsonResult)
   return response
