@@ -17,9 +17,9 @@ import vrp_io
 
 def create_data():
   """Creates the data."""
-  load_dotenv()
+  #load_dotenv()
   data = {}
-  data['API_key'] = os.getenv('MAPS_API_KEY')
+  data['API_key'] = 'AIzaSyDg8oDMkIGwPg-JHc86lxvX4SNce6TzjWs'
   data['addresses'] = vrp_io.get_addresses('53.425334%2C-6.231581', data)
   return data
 
@@ -64,7 +64,7 @@ def send_request(origin_addresses, dest_addresses, API_key):
   request = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial'
   origin_address_str = build_address_str(origin_addresses)
   dest_address_str = build_address_str(dest_addresses)
-  request = str(request) + '&origins=' + str(origin_address_str) + '&destinations=' + str(dest_address_str) + '&key=' +str(API_key)
+  request = str(request) + '&origins=' + str(origin_address_str) + '&destinations=' + str(dest_address_str) + '&key=' + API_key
   jsonResult = urllib.request.urlopen(request).read()
   response = json.loads(jsonResult)
   return response
