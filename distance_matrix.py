@@ -7,13 +7,12 @@ Vehicle Routing Optimization
 """
 from __future__ import division
 from __future__ import print_function
-import os
-from dotenv import load_dotenv
-import requests
 import json
 import urllib.request
-import vrp_io
+from dotenv import load_dotenv
 from starlette.config import Config
+import vrp_io
+from app import *
 
 def create_data():
   """Creates the data."""
@@ -21,7 +20,7 @@ def create_data():
   #load_dotenv()
   data = {}
   data['API_key'] = 'AIzaSyDg8oDMkIGwPg-JHc86lxvX4SNce6TzjWs'
-  data['addresses'] = vrp_io.get_addresses('53.425334%2C-6.231581', data)
+  data['addresses'] = vrp_io.get_addresses(app.deliverer_location, data, app.orders)
   return data
 
 
