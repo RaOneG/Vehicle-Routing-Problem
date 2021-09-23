@@ -220,18 +220,29 @@ def get_deliverer_route(routes, deliverer_location, orders):
   return route_table
 
 
-class RoutingTable(Resource):
-    def post(self):
-        if request.method == "POST":
-            parser = reqparse.RequestParser()  # initialize
-            parser.add_argument('deliverer_coordinates', required=True)  # add arguments
-            parser.add_argument('orders_address', required=True)
-            req = parser.parse_args()  # parse arguments to dictionary
-            orders = json.loads(req['orders_address'])
-            deliverer_location = req['deliverer_coordinates']
-            return get_deliverer_route(get_routes(deliverer_location, orders), deliverer_location, orders)  # return data with 200 OK
+@app.route('/routing_table', methods=['POST'])
+def post():
+    if request.method == 'POST':
+        parser = reqparse.RequestParser()  # initialize
+        parser.add_argument('deliverer_coordinates', required=True)  # add arguments
+        parser.add_argument('orders_address', required=True)
+        req = parser.parse_args()  # parse arguments to dictionary
+        orders = json.loads(req['orders_address'])
+        deliverer_location = req['deliverer_coordinates']
+        return str(get_deliverer_route(get_routes(deliverer_location, orders), deliverer_location, orders))
+
+# class RoutingTable(Resource):
+#     def post(self):
+#         if request.method == "POST":
+#             parser = reqparse.RequestParser()  # initialize
+#             parser.add_argument('deliverer_coordinates', required=True)  # add arguments
+#             parser.add_argument('orders_address', required=True)
+#             req = parser.parse_args()  # parse arguments to dictionary
+#             orders = json.loads(req['orders_address'])
+#             deliverer_location = req['deliverer_coordinates']
+#             return get_deliverer_route(get_routes(deliverer_location, orders), deliverer_location, orders)
             
-api.add_resource(RoutingTable, '/routing_table')
+# api.add_resource(RoutingTable, '/routing_table')
 
 if __name__ == '__main__':
      app.run()  # run our Flask app
