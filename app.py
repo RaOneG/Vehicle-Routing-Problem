@@ -37,24 +37,13 @@ api = Api(app)
 
 
 class RoutingTable(Resource):
-    #def get(self):
-    #    return vrp_io.get_deliverer_route(vrp_pickup.get_routes(), '53.425334%2C-6.231581')
-    
     def post(self):
-        parser = reqparse.RequestParser()  # initialize
-        parser.add_argument('deliverer_coordinates', required=True)  # add arguments
-        parser.add_argument('orders_address', required=True)
-        args = parser.parse_args()  # parse arguments to dictionary
-            
-        # create new dataframe containing new values
-        # new_data = pd.DataFrame({
-        #     'deliverer_coordinates': args['deliverer_coordinates'],
-        #     'order': args['order']
-        #     })
-        
-        # convert to json
-        print(args)
-        return vrp_io.get_deliverer_route(vrp_pickup.get_routes(), '53.425334%2C-6.231581')  # return data with 200 OK
+        if request.method == "POST"
+            parser = reqparse.RequestParser()  # initialize
+            parser.add_argument('deliverer_coordinates', required=True)  # add arguments
+            parser.add_argument('orders_address', required=True)
+            req = parser.parse_args()  # parse arguments to dictionary
+            return vrp_io.get_deliverer_route(vrp_pickup.get_routes(), '53.425334%2C-6.231581')  # return data with 200 OK
 
 api.add_resource(RoutingTable, '/routing_table')
 
