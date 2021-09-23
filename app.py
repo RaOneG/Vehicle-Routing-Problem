@@ -229,7 +229,7 @@ def post():
         req = parser.parse_args()  # parse arguments to dictionary
         orders = json.loads(req['orders_address'])
         deliverer_location = req['deliverer_coordinates']
-        return str(get_deliverer_route(get_routes(deliverer_location, orders), deliverer_location, orders))
+        return "Hello" #str(get_deliverer_route(get_routes(deliverer_location, orders), deliverer_location, orders))
 
 # class RoutingTable(Resource):
 #     def post(self):
