@@ -38,7 +38,7 @@ api = Api(app)
 
 class RoutingTable(Resource):
     def post(self):
-        if request.method == "POST"
+        if request.method == "POST":
             parser = reqparse.RequestParser()  # initialize
             parser.add_argument('deliverer_coordinates', required=True)  # add arguments
             parser.add_argument('orders_address', required=True)
