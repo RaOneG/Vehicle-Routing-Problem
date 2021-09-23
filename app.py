@@ -2,7 +2,7 @@ from __future__ import division
 from __future__ import print_function
 from ortools.constraint_solver import routing_enums_pb2
 from ortools.constraint_solver import pywrapcp
-from flask import Flask
+from flask import Flask, jsonify
 from flask_restful import Resource, Api, reqparse, request
 from dotenv import load_dotenv
 from starlette.config import Config
@@ -229,7 +229,7 @@ def post():
         req = parser.parse_args()  # parse arguments to dictionary
         orders = json.loads(req['orders_address'])
         deliverer_location = req['deliverer_coordinates']
-        return "Hello" #str(get_deliverer_route(get_routes(deliverer_location, orders), deliverer_location, orders))
+        return jsonify(get_deliverer_route(get_routes(deliverer_location, orders), deliverer_location, orders))
 
 # class RoutingTable(Resource):
 #     def post(self):
