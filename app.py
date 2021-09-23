@@ -1,35 +1,67 @@
 from flask import Flask
-from flask_restful import Resource, Api, reqparse
+from flask_restful import Resource, Api, reqparse, request
+import pandas as pd
+import json
 import vrp_io
 import vrp_pickup
 
 
 app = Flask(__name__)
 api = Api(app)
-#port = int(os.environ.get('PORT',  46433))
 
-class Routing(Resource):
-    def get(self):
-        #route = vrp_pickup.get_routes()
-        return vrp_io.get_deliverer_route([0, 1, 3, 9, 7, 5, 6, 8, 10, 4, 2], '53.425334%2C-6.231581')
+
+# @app.route('/routing_table', methods=['GET', 'POST'])
+# def get():
+#     if request.method == 'GET':
+#         return vrp_io.get_deliverer_route(vrp_pickup.get_routes(), '53.425334%2C-6.231581')
+
+# def post():
+#     if request.method == 'POST':
+#         parser = reqparse.RequestParser()  # initialize
+#         parser.add_argument('userId', required=True)  # add arguments
+#         parser.add_argument('name', required=True)
+#         parser.add_argument('city', required=True)
+#         args = parser.parse_args()  # parse arguments to dictionary
+            
+#         # create new dataframe containing new values
+#         new_data = pd.DataFrame({
+#             'userId': args['userId'],
+#             'name': args['name'],
+#             'city': args['city'],
+#             'locations': [[]]
+#             })
+        
+#         # convert to json
+#         print(new_data)
+#     return 200  # return data with 200 OK
+
 
 class RoutingTable(Resource):
-    def get(self):
-        #route = vrp_pickup.get_routes()
-        return vrp_io.get_deliverer_route(vrp_pickup.get_routes(), '53.425334%2C-6.231581')
+    #def get(self):
+    #    return vrp_io.get_deliverer_route(vrp_pickup.get_routes(), '53.425334%2C-6.231581')
+    
+    def post(self):
+        parser = reqparse.RequestParser()  # initialize
+        parser.add_argument('deliverer_coordinates', required=True)  # add arguments
+        parser.add_argument('orders_address', required=True)
+        args = parser.parse_args()  # parse arguments to dictionary
+            
+        # create new dataframe containing new values
+        # new_data = pd.DataFrame({
+        #     'deliverer_coordinates': args['deliverer_coordinates'],
+        #     'order': args['order']
+        #     })
+        
+        # convert to json
+        print(args)
+        return vrp_io.get_deliverer_route(vrp_pickup.get_routes(), '53.425334%2C-6.231581')  # return data with 200 OK
 
 api.add_resource(RoutingTable, '/routing_table')
 
 if __name__ == '__main__':
      app.run()  # run our Flask app
 
-#@app.route('/routing_table', methods=['GET'])
-# def get_route():
-#     routes = vrp_pickup.get_routes()
-#     route_table = vrp_io.get_deliverer_route(routes[0], '53.425334%2C-6.231581')
-#     # store in a json filewith open('route_table.json', 'w') as file:
-#     route_table = json.dumps(route_table, indent=4)
-#     return route_table
+
 
 
 
