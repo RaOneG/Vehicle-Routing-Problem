@@ -52,6 +52,7 @@ def get_deliverer_route(routes, deliverer_location, orders):
     loc_idx = loc_idx - 1   # because the deliverer_location = 0 which is not in the orders_adresses so orders_adresses[0] is equivalent to routes[1]
     order = orders_addresses[loc_idx]
     for key, value in order.items():
+      print(key)
       order[key] = value.replace('%2C', ',')
       route_table += [orders_addresses[loc_idx]]
   route_table = json.dumps(route_table)

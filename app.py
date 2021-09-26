@@ -215,8 +215,12 @@ def get_deliverer_route(routes, deliverer_location, orders):
     loc_idx = loc_idx - 1   # because the deliverer_location = 0 which is not in the orders_adresses so orders_adresses[0] is equivalent to routes[1]
     order = orders_addresses[loc_idx]
     for key, value in order.items():
-      order[key] = value.replace('%2C', ',')
-      route_table += [orders_addresses[loc_idx]]
+      single_loc = {}
+      k = key.split("_")
+      single_loc[k[1]] = value.replace('%2C', ',')
+      single_loc["order_id"] = k[0]
+      print(single_loc)
+      route_table += [single_loc]
   return route_table
 
 
