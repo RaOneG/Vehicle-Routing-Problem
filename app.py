@@ -217,9 +217,9 @@ def get_deliverer_route(routes, deliverer_location, orders):
     for key, value in order.items():
       single_loc = {}
       k = key.split("_")
-      single_loc[k[1]] = value.replace('%2C', ',')
       single_loc["order_id"] = k[0]
-      print(single_loc)
+      single_loc["coordinates"] = value.replace('%2C', ',')
+      single_loc["type"] = k[1]
       route_table += [single_loc]
   return route_table
 
