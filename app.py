@@ -50,7 +50,7 @@ def create_data(deliverers_location, orders):
   #config = Config(".env")
   #load_dotenv()
   data = {}
-  data['API_key'] = S3Connection(os.environ('API_KEY'))
+  data['API_key'] = 'AIzaSyDg8oDMkIGwPg-JHc86lxvX4SNce6TzjWs' #S3Connection(os.environ.get('API_KEY'))
   data['addresses'] = get_addresses(data, deliverers_location, orders)
   return data
 
